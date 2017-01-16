@@ -1,181 +1,49 @@
-﻿<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../tangere/tangere.html">
+<link rel="import" href="../at-carbon-icon/at-carbon-icon.html">
+<link rel="import" href="styles/at-core-modal-styles.html">
 
-<polymer-element name="at-core-modal">
 
+<dom-module id="at-core-modal">
   <template>
-    <style>
-      * {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-      }
 
-      html,
-      body {
-        width: 100%;
-      }
+    <style include="at-core-modal-styles"></style>
 
-      body {
-        font-family: "Helvetica Neue";
-        color: #666;
-        padding: 40px;
-      }
-
-      a {
-        color: #D4341A;
-        text-decoration: none;
-      }
-
-      .tc {
-        text-align: center;
-      }
-
-      .dib {
-        display: block;
-      }
-
-      .btn-green-flat-trigger {
-        border: 1px solid #47ba6b;
-        background: transparent;
-        font-size: 20px;
-        color: #47ba6b;
-        font-weight: 200;
-        padding: 15px 30px;
-        display: inline-block;
-        margin: 0 auto;
-        margin-top: 40px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -o-border-radius: 4px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      .overlay {
-        background: rgba(255, 255, 255, 0.77);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-
-      .modal {
-        visibility: hidden;
-      }
-
-      .modal__contents {
-        background: #FFF;
-        -webkit-box-shadow: 0 0 8px 2px rgba(182, 182, 182, 0.75);
-        -moz-box-shadow: 0 0 8px 2px rgba(182,182,182, 0.75);
-        -o-box-shadow: 0 0 8px 2px rgba(182,182,182,0.75);
-        box-shadow: 0 0 8px 2px rgba(182,182,182,0.75);
-        width: 50%;
-        position: absolute;
-        left: 38%;
-        margin-left: -14%;
-        top: 15%;
-        min-height: 450px;
-      }
-
-      .modal-header {
-        border-bottom: 1px solid #ccc;
-      }
-
-      .modal-body {
-        width: 100%;
-      }
-
-      .modal--show {
-        visibility: visible;
-      }
-
-      .modal--transition {
-        -webkit-transform: scale(0.7);
-        -moz-transform: scale(0.7);
-        -ms-transform: scale(0.7);
-        transform: scale(0.7);
-        opacity: 0;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-      }
-
-      .modal--show .modal--transition {
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        transform: scale(1);
-        opacity: 1;
-      }
-
-      @media (max-width: 1139px) {
-        .modal p {
-          text-align: center;
-        }
-      }
-
-      @media (max-width : 991px) {
-
-        .modal__contents {
-          top: 0;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          margin: 0;
-        }
-
-        .modal--transition {
-          -webkit-transform: translateX(-0) translateY(150%);
-          -moz-transform: translateX(-0) translateY(150%);
-          -ms-transform: translateX(-0) translateY(150%);
-          transform: translateX(-0) translateY(150%);
-        }
-      }
-    </style>
-
-    <div class="modal">
-      <div class="overlay"></div>
-      <div class="modal__contents modal--transition">
-        <div class="modal-header">
-          <content select=".modal-header"></content>
+    <div id="modal" class="modal">
+      <div id="overlay" class="overlay"></div>
+      <div id="modalContents" class="modal__contents modal--transition">
+        <div on-tap="_closeClick" class="btn-close-container">
+          <at-carbon-icon class="btn-close-position" icon="now:cancel"></at-carbon-icon>
         </div>
-        <div class="modal-body">
-          <content select=".modal-body"></content>
-        </div>
+        <content select=".modal-body"><content>
       </div>
     </div>
 
-    <div class="dib tc">
-      <h1>Responsive Modal</h1>
-      <p>Uses different transitions based on screen size.</p>
-      <a class="btn-green-flat-trigger">Show Modal</a>
-    </div>
-
   </template>
-  
   <script>
-    Polymer('at-core-modal', {
-      ready: function () {
-        var modal = this.shadowRoot.getElementsByClassName('modal')[0];
-
-        var triggerBtn = this.shadowRoot.getElementsByClassName('btn-green-flat-trigger')[0];
-        triggerBtn.addEventListener("click", function () {
-          modal.classList.toggle('modal--show');
+    'use strict';
+    Polymer({
+      is: 'at-core-modal',
+      properties: {
+      },
+      ready: function() {
+        var self = this;
+        var overlay = this.querySelector('.overlay');
+        overlay.addEventListener('click', function(event) {
+          self.close();
         });
+      },
 
-        var overlayBtn = this.shadowRoot.getElementsByClassName('overlay')[0];
-        overlayBtn.addEventListener("click", function () {
-          modal.classList.toggle('modal--show');
-        });
+      open: function () {
+        this.toggleClass('modal--show', true, this.$.modal);
+      },
 
-        // the element doens't exist in the html but its in the code
-        //var modalCloseBtn = this.shadowRoot.getElementsByClassName('modal__close')[0];
-        //modalCloseBtn.addEventListener("click", function () {
-        //  debugger;
-        //  $(modal).toggleClass('modal--show');
-        //});
+      close: function () {
+        this.toggleClass('modal--show', false, this.$.modal);
+      },
+
+      _closeClick: function () {
+        this.close();
       }
     });
   </script>
-</polymer-element>
+</dom-module>

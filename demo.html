@@ -1,161 +1,26 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="utf-8" />
-  <title>At core modal demo</title>
-  <script src="../webcomponentsjs/webcomponents.js"></script>
-  <link rel="import" href="at-core-modal.html" />
-  <style>
-    * {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
+  <title>at-core-modal demo</title>
+  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="demo-element.html">
 
-    html,
-    body {
-      width: 100%;
-    }
-
+  <style media="screen">
     body {
       font-family: "Helvetica Neue";
       color: #666;
       padding: 40px;
     }
-
-    a {
-      color: #D4341A;
-      text-decoration: none;
-    }
-
-    .btn-green-flat {
-      border: 1px solid #47BA6B;
-      background: rgba(0, 0, 0, 0);
-      font-size: 20px;
-      color: #47BA6B;
-      font-weight: 200;
-      padding: 10px 28px;
-      text-align: center;
-      width: 175px;
-      display: block;
-      margin: 0 auto;
-      margin-top: 20px;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -o-border-radius: 4px;
-      border-radius: 4px;
-      cursor: pointer;
-      text-transform: uppercase;
-    }
-
-    .modal-header {
-      border-bottom: 1px solid #ccc;
-    }
-
-      .modal-header h3 {
-        color: #34495E;
-        text-align: center;
-        font-weight: bold;
-        font-size: 22px;
-      }
-
-      .modal-header span {
-        font-weight: 200;
-      }
-
-    .modal-body {
-      width: 100%;
-    }
-
-      .modal-body p {
-        color: #34495E;
-        font-size: 16px;
-        line-height: 23px;
-        text-align: center;
-      }
-
-      .modal-body .content-left {
-        height: 225px;
-        width: 50%;
-        position: relative;
-        top: 55px;
-        float: left;
-        border-right: 1px solid #CCC;
-      }
-
-      .modal-body .content-right {
-        height: 225px;
-        width: 50%;
-        position: relative;
-        top: 55px;
-        float: left;
-      }
-
-    .content-right .sponsor-name {
-      font-weight: bold;
-      color: #000;
-    }
-
-    .modal__contents h1 {
-      margin: 0;
-      padding: 0;
-      line-height: 32rem;
-      text-align: center;
-      display: block;
-    }
-
-    @media (max-width: 1139px) {
-
-      .modal-body .content-left {
-        width: 80%;
-        display: block;
-        float: none;
-        margin: 0 auto;
-        border-right: none;
-        border-bottom: 1px solid #ccc;
-      }
-
-      .modal-body .content-right {
-        width: 80%;
-        display: block;
-        margin: 40px auto;
-        float: none;
-        border-right: none;
-      }
-    }
-
-    @media (max-width : 991px) {
-
-      .modal-header h3 {
-        font-size: 18px;
-      }
-    }
   </style>
 
 </head>
-<body>
-  <at-core-modal>
-    <div class="modal-header">
-      <h3> <span> Whoops!<span> <b>It looks like this offer has expired<br> or else been used by another customer.</b></h3>
-    </div>
-    <div class="modal-body">
-      <div class="content-left">
-        <p>
-          Continue with sending this card <br>
-          for $1.98 plus shipping.
-        </p>
-        <a href="#" class="btn-green-flat">Send Card</a>
-      </div>
-      <div class="content-right">
-        <p> To learn how to send this card<br> for free contact <span class="sponsor-name">Jordan Adler</span> <br> through the link below.</p>
-        <a href="#" class="btn-green-flat">Contact</a>
-      </div>
-    </div>
-  </at-core-modal>
 
-  <script>
-    window.addEventListener('polymer-ready', function () { });
-  </script>
+<body>
+  <demo-element></demo-element>
 </body>
+
 </html>
