@@ -1,0 +1,120 @@
+<link rel="import" href="../tangere/tangere.html">
+<link rel="import" href="at-core-modal.html">
+
+<dom-module id="demo-element2">
+  <template>
+  <style>
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+
+    a {
+      color: #D4341A;
+      text-decoration: none;
+    }
+
+    .clear-float {
+      clear: both;
+    }
+
+    .modal-body {
+      width: 100%;
+    }
+
+    .modal-body p {
+      color: #34495E;
+      font-size: 16px;
+      line-height: 23px;
+      text-align: center;
+    }
+
+    .modal-body .content-left {
+      height: auto;
+      width: 50%;
+      float: left;
+      border-right: 1px solid #CCC;
+      margin: 55px 0 25px 0;
+    }
+
+    .modal-body .content-right {
+      height: 225px;
+      width: 50%;
+      float: left;
+      margin: 55px 0 25px 0;
+    }
+
+    .content-right .sponsor-name {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .btn-green-flat {
+      border: 1px solid #47BA6B;
+      background: rgba(0, 0, 0, 0);
+      font-size: 20px;
+      color: #47BA6B;
+      font-weight: 200;
+      padding: 10px 28px;
+      text-align: center;
+      width: 175px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .tc {
+      text-align: center;
+    }
+  </style>
+
+  <at-core-modal id="coreModal">
+    <div class="modal-body">
+      <div class="content-left">
+        <p>
+          a Continue with sending this card <br> for $1.98 plus shipping.
+        </p>        
+        <a href="#" class="btn-green-flat">Send Card</a>
+      </div>
+      <div class="content-right">
+        <p> To learn how to send this card<br> for free contact <span class="sponsor-name">Jordan Adler</span> <br> through the link below.</p>
+        <a href="#" class="btn-green-flat">Contact</a>
+      </div>
+      <div class="clear-float">
+
+      </div>
+    </div>
+  </at-core-modal>
+  <div id="showModal" class="tc">
+    <a href="#" class="btn-green-flat">Open modal</a>
+  </div>
+
+  </template>
+  <script>
+    'use strict';
+    Polymer({
+      is: 'demo-element2',
+      properties: {
+
+      },
+      ready: function () {
+        var coreModal = this.$.coreModal;
+        this.$.showModal.addEventListener('click', function(event) {
+          coreModal.open();
+        });
+      }
+    });
+  </script>
+</dom-module>
