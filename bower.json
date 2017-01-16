@@ -1,0 +1,9 @@
+{
+  "name": "at-core-modal",
+  "private": true,
+  "version": "1.0.0.0",
+  "dependencies": {
+    "tangere": "TangereJs/tangere#master",
+    "at-core-icon": "TangereJs/at-core-icon#master"
+  }
+}
