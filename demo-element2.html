@@ -63,7 +63,6 @@
       font-weight: 200;
       padding: 10px 28px;
       text-align: center;
-      width: 175px;
       display: block;
       margin: 0 auto;
       margin-top: 20px;
@@ -73,6 +72,10 @@
       border-radius: 4px;
       cursor: pointer;
       text-transform: uppercase;
+    }
+
+    .btn-green-flat.fixed-width {
+      width: 175px;
     }
 
     .tc {
@@ -85,20 +88,18 @@
       <div class="content-left">
         <p>
           a Continue with sending this card <br> for $1.98 plus shipping.
-        </p>        
+        </p>
         <a href="#" class="btn-green-flat">Send Card</a>
       </div>
       <div class="content-right">
         <p> To learn how to send this card<br> for free contact <span class="sponsor-name">Jordan Adler</span> <br> through the link below.</p>
         <a href="#" class="btn-green-flat">Contact</a>
       </div>
-      <div class="clear-float">
-
-      </div>
+      <div class="clear-float"></div>
     </div>
   </at-core-modal>
   <div id="showModal" class="tc">
-    <a href="#" class="btn-green-flat">Open modal</a>
+    <a href="#" class="btn-green-flat fixed-width">Open modal</a>
   </div>
 
   </template>
