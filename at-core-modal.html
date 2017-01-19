@@ -1,7 +1,7 @@
 <link rel="import" href="../tangere/tangere.html">
 <link rel="import" href="../at-carbon-icon/at-carbon-icon.html">
+<link rel="import" href="../at-core-media-query/at-core-media-query.html">
 <link rel="import" href="styles/at-core-modal-styles.html">
-
 
 <dom-module id="at-core-modal">
   <template>
@@ -14,6 +14,7 @@
       }
     </style>
 
+    <at-core-media-query id="mediaQuery" query$="{{_calculateQueryString(minWidth)}}"></at-core-media-query>
     <div id="modal" class="modal">
       <div id="overlay" class="overlay"></div>
       <div id="modalContents" class="modal__contents modal--transition">
@@ -30,17 +31,52 @@
     Polymer({
       is: 'at-core-modal',
       properties: {
+        minWidth: {
+          type: String,
+          value: '600'
+        }
       },
+
+      _calculateQueryString: function (minWidth) {
+        var result = "(min-width: " + minWidth + "px)";
+        return result;
+      },
+
       ready: function() {
         var self = this;
         var overlay = this.querySelector('.overlay');
         overlay.addEventListener('click', function(event) {
           self.close();
         });
+
+        this.$.mediaQuery.addEventListener('query-matches-changed', function (event) {
+          self._queryMatchesChangedHandler(event.detail.value);
+        });
+      },
+
+      _queryMatchesChangedHandler: function (newValue) {
+        var modalContents = this.$.modalContents;
+        var mcClientRect = modalContents.getBoundingClientRect();
+        var mcHeight = mcClientRect.height;
+        if (mcHeight === 0) { return; }
+
+        var isMobile = !newValue;
+
+        this.toggleClass('mobile', isMobile, modalContents);
+
+        var windowHeight = window.outerHeight;
+        var hasBottom = windowHeight >= mcHeight;
+        if (isMobile) {
+          this.toggleClass('has-bottom', hasBottom, modalContents);
+        } else {
+          this.toggleClass('has-bottom', false, modalContents);
+        }
       },
 
       open: function () {
         this.toggleClass('modal--show', true, this.$.modal);
+        var queryMatches = this.$.mediaQuery.queryMatches;
+        this._queryMatchesChangedHandler(queryMatches);
       },
 
       close: function () {
