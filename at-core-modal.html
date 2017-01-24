@@ -59,7 +59,6 @@
         var mcClientRect = modalContents.getBoundingClientRect();
         var mcHeight = mcClientRect.height;
         if (mcHeight === 0) { return; }
-
         var isMobile = !newValue;
 
         this.toggleClass('mobile', isMobile, modalContents);
@@ -74,6 +73,13 @@
       },
 
       open: function () {
+        if (this.parentElement) {
+          this._oldParentElement = this.parentElement;
+          this.parentElement.removeChild(this);
+        }
+
+        document.body.appendChild(this);
+
         this.toggleClass('modal--show', true, this.$.modal);
         var queryMatches = this.$.mediaQuery.queryMatches;
         this._queryMatchesChangedHandler(queryMatches);
@@ -81,6 +87,11 @@
 
       close: function () {
         this.toggleClass('modal--show', false, this.$.modal);
+        document.body.removeChild(this);
+        if (this._oldParentElement) {
+          this._oldParentElement.appendChild(this);
+          this._oldParentElement = null;
+        }
       },
 
       _closeClick: function () {
