@@ -1,0 +1,42 @@
+<link rel="import" href="../tangere/tangere.html">
+<link rel="import" href="at-core-modal.html">
+
+<dom-module id="demo-element3">
+  <template>
+  <style>
+
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+
+  </style>
+
+  <at-core-modal id="dialog">
+  </at-core-modal>
+  <div id="showModal" on-tap="show">
+    <a href="#" class="btn-green-flat fixed-width">Open modal</a>
+  </div>
+
+  </template>
+  <script>
+    'use strict';
+    Polymer({
+      is: 'demo-element3',
+      properties: {
+
+      },
+     show: function(e) {
+        
+       var dialog = Polymer.dom(this.$.dialog);
+        dialog.innerHTML = "";
+        var div = document.createElement("div");
+        div.innerHTML = "modal content";
+        dialog.appendChild(div);
+        Polymer.dom.flush();
+
+        this.$.dialog.open();
+     }
+    });
+  </script>
+</dom-module>
