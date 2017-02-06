@@ -13,6 +13,7 @@
   </style>
 
   <at-core-modal id="dialog">
+    <div id="modalBody" class="modal-body"></div>
   </at-core-modal>
   <div id="showModal" on-tap="show">
     <a href="#" class="btn-green-flat fixed-width">Open modal</a>
@@ -26,17 +27,19 @@
       properties: {
 
       },
-     show: function(e) {
-        
-       var dialog = Polymer.dom(this.$.dialog);
-        dialog.innerHTML = "";
+      show: function(e) {
+
+        var modalBody = Polymer.dom(this.$.modalBody);
+        modalBody.innerHTML = "";
+
         var div = document.createElement("div");
         div.innerHTML = "modal content";
-        dialog.appendChild(div);
+        modalBody.appendChild(div);
+
         Polymer.dom.flush();
 
         this.$.dialog.open();
-     }
+      }
     });
   </script>
 </dom-module>
