@@ -17,7 +17,7 @@
     <at-core-media-query id="mediaQuery" query$="{{_calculateQueryString(minWidth)}}"></at-core-media-query>
     <div id="modal" class="modal">
       <div id="overlay" class="overlay"></div>
-      <div id="modalContents" class="modal__contents modal--transition">
+      <div id="modalContents" class="contents">
         <div on-tap="_closeClick" class="btn-close-container">
           <at-carbon-icon class="btn-close-position" icon="now:cancel"></at-carbon-icon>
         </div>
@@ -64,12 +64,10 @@
         this.toggleClass('mobile', isMobile, modalContents);
 
         var windowHeight = window.outerHeight;
-        var hasBottom = windowHeight >= mcHeight;
-        if (isMobile) {
-          this.toggleClass('has-bottom', hasBottom, modalContents);
-        } else {
-          this.toggleClass('has-bottom', false, modalContents);
-        }
+        var heightLessThan = windowHeight >= mcHeight;
+        
+        this.toggleClass('height-less-then', heightLessThan, modalContents);
+        this.toggleClass('height-greater-then', !heightLessThan, modalContents);
       },
 
       open: function () {
@@ -80,13 +78,14 @@
 
         document.body.appendChild(this);
 
-        this.toggleClass('modal--show', true, this.$.modal);
+        this.toggleClass('show', true, this.$.modal);
+
         var queryMatches = this.$.mediaQuery.queryMatches;
         this._queryMatchesChangedHandler(queryMatches);
       },
 
       close: function () {
-        this.toggleClass('modal--show', false, this.$.modal);
+        this.toggleClass('show', false, this.$.modal);
         document.body.removeChild(this);
         if (this._oldParentElement) {
           this._oldParentElement.appendChild(this);
