@@ -65,7 +65,7 @@
 
         var windowHeight = window.outerHeight;
         var heightLessThan = windowHeight >= mcHeight;
-        
+
         this.toggleClass('height-less-then', heightLessThan, modalContents);
         this.toggleClass('height-greater-then', !heightLessThan, modalContents);
       },
@@ -76,6 +76,9 @@
           this.parentElement.removeChild(this);
         }
 
+        this._scrollX = window.scrollX;
+        this._scrollY = window.scrollY;
+
         document.body.appendChild(this);
 
         this.toggleClass('show', true, this.$.modal);
@@ -85,6 +88,7 @@
       },
 
       close: function () {
+        window.scrollTo(this._scrollX, this._scrollY);
         this.toggleClass('show', false, this.$.modal);
         document.body.removeChild(this);
         if (this._oldParentElement) {
