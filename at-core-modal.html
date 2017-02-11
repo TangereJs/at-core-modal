@@ -66,6 +66,10 @@
         var windowHeight = window.outerHeight;
         var heightLessThan = windowHeight >= mcHeight;
 
+        if (!isMobile && window.parentIFrame != null) {
+          heightLessThan = false; // never center in cross domain iframe
+        }
+
         this.toggleClass('height-less-then', heightLessThan, modalContents);
         this.toggleClass('height-greater-then', !heightLessThan, modalContents);
       },
@@ -78,6 +82,12 @@
 
         this._scrollX = window.scrollX;
         this._scrollY = window.scrollY;
+        window.scrollTo(0, 0);
+
+        // when running as iframe get position from scroll container & scroll container to top
+        if (window.parentIFrame != null) {         
+          window.parentIFrame.sendMessage({ cmd: "position-push", x:0, y:0 });
+        }
 
         document.body.appendChild(this);
 
@@ -88,13 +98,28 @@
       },
 
       close: function () {
-        window.scrollTo(this._scrollX, this._scrollY);
-        this.toggleClass('show', false, this.$.modal);
+
         document.body.removeChild(this);
         if (this._oldParentElement) {
           this._oldParentElement.appendChild(this);
           this._oldParentElement = null;
         }
+
+        var modalContents = this.$.modalContents;
+
+        this.toggleClass('show', false, this.$.modal);
+        this.toggleClass('mobile', false, modalContents);
+        this.toggleClass('height-less-then', false, modalContents);
+        this.toggleClass('height-greater-then', false, modalContents);
+
+
+        // when running as iframe scoll container restore iframe position
+        if (window.parentIFrame != null) {
+          window.parentIFrame.sendMessage({ cmd: "position-pop" });
+        } else {
+          window.scrollTo(this._scrollX, this._scrollY);
+        }
+
       },
 
       _closeClick: function () {
