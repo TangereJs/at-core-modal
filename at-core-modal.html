@@ -75,6 +75,10 @@
       },
 
       open: function () {
+
+        if (this._open) return;
+        this._open = true;
+
         if (this.parentElement) {
           this._oldParentElement = this.parentElement;
           this.parentElement.removeChild(this);
@@ -98,6 +102,9 @@
       },
 
       close: function () {
+
+        if (!this._open) return;
+        this._open = false;
 
         document.body.removeChild(this);
         if (this._oldParentElement) {
