@@ -63,7 +63,7 @@
 
         this.toggleClass('mobile', isMobile, modalContents);
 
-        var windowHeight = window.outerHeight;
+        var windowHeight = window.innerHeight;
         var heightLessThan = windowHeight >= mcHeight;
 
         if (!isMobile && window.parentIFrame != null) {
