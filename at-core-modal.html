@@ -49,8 +49,7 @@
           self.close();
         });
 
-        this.$.mediaQuery.addEventListener('query-matches-changed', function (event) {
-          debugger;
+        this.$.mediaQuery.addEventListener('query-matches-changed', function (event) {         
           self._queryMatchesChangedHandler(event.detail.value);
         });
       },
@@ -64,6 +63,7 @@
         var isMobile = !newValue;
 
         this.toggleClass('mobile', isMobile, modalContents);
+        this.toggleClass('mobile', isMobile, this.$.overlay);  // mobile has full white overlay
 
         var windowHeight = window.innerHeight;
         var heightLessThan = windowHeight >= mcHeight;
@@ -100,6 +100,7 @@
         document.body.appendChild(this);
 
         this.toggleClass('show', true, this.$.modal);
+        this.toggleClass('dark', true, this.$.overlay);
 
         this.async(function() {
           var queryMatches = this.$.mediaQuery.queryMatches;
@@ -120,8 +121,10 @@
 
         var modalContents = this.$.modalContents;
 
-        this.toggleClass('show', false, this.$.modal);
+        this.toggleClass('dark', false, this.$.overlay);
+        this.toggleClass('show', false, this.$.modal);        
         this.toggleClass('mobile', false, modalContents);
+        this.toggleClass('mobile', false, this.$.overlay);
         this.toggleClass('height-less-then', false, modalContents);
         this.toggleClass('height-greater-then', false, modalContents);
 
