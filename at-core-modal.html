@@ -49,7 +49,8 @@
           self.close();
         });
 
-        this.$.mediaQuery.addEventListener('query-matches-changed', function (event) {         
+        this.$.mediaQuery.addEventListener('query-matches-changed', function (event) {
+          this._showCntr = 0;
           self._queryMatchesChangedHandler(event.detail.value);
         });
       },
@@ -59,7 +60,16 @@
         var modalContents = this.$.modalContents;
         var mcClientRect = modalContents.getBoundingClientRect();
         var mcHeight = mcClientRect.height;
-        if (mcHeight === 0) { console.log("mcHeight failed"); return; }
+        if (mcHeight === 0) {
+          console.log("mcHeight failed, retry " + this._showCntr++);
+          if (this._showCntr < 5) {
+            this.async(function () {
+              this._queryMatchesChangedHandler(newValue);
+            }, 100);
+            return;
+          }
+          mcHeight = window.innerHeight;
+        }
         var isMobile = !newValue;
 
         this.toggleClass('mobile', isMobile, modalContents);
@@ -102,10 +112,10 @@
         this.toggleClass('show', true, this.$.modal);
         this.toggleClass('dark', true, this.$.overlay);
 
-        this.async(function() {
+        this._showCntr = 0;
           var queryMatches = this.$.mediaQuery.queryMatches;
           this._queryMatchesChangedHandler(queryMatches); 
-        }, 100);
+       
       },
 
       close: function () {
