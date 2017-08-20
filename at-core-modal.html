@@ -34,6 +34,10 @@
         minWidth: {
           type: String,
           value: '600'
+        },
+        name: {
+          type: String,
+          value: ''
         }
       },
 
@@ -121,6 +125,11 @@
       close: function () {
 
         if (!this._open) return;
+
+        var evData = { "name": this.name };
+
+        this.fire("close-modal", evData, { bubbles: false });
+
         this._open = false;
 
         document.body.removeChild(this);
