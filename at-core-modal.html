@@ -48,7 +48,7 @@
 
       ready: function() {
         var self = this;
-        var overlay = this.querySelector('.overlay');
+        var overlay = Polymer.dom(this.root).querySelector('.overlay');
         overlay.addEventListener('click', function(event) {
           self.close();
         });
