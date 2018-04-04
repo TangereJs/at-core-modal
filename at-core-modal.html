@@ -122,11 +122,14 @@
        
       },
 
-      close: function () {
+      close: function (reason) {
 
         if (!this._open) return;
 
-        var evData = { "name": this.name };
+        var evData = { 
+          name: this.name,
+          reason: reason 
+        };
 
         this.fire("close-modal", evData, { bubbles: false });
 
