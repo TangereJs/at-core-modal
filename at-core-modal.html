@@ -54,7 +54,7 @@
         });
 
         this.$.mediaQuery.addEventListener('query-matches-changed', function (event) {
-          this._showCntr = 0;
+          self._showCntr = 0;
           self._queryMatchesChangedHandler(event.detail.value);
         });
       },
