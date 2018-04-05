@@ -17,7 +17,7 @@
     <at-core-media-query id="mediaQuery" query$="{{_calculateQueryString(minWidth)}}"></at-core-media-query>
     <div id="modal" class="modal">
       <div id="overlay" class="overlay"></div>
-      <div id="modalContents" class="contents">
+      <div id="modalContents" class="contents" wide$="[[wide]]">
         <div on-tap="_closeClick" class="btn-close-container">
           <at-carbon-icon class="btn-close-position" icon="now:cancel"></at-carbon-icon>
         </div>
@@ -38,6 +38,11 @@
         name: {
           type: String,
           value: ''
+        },
+
+        wide: {
+          type: Boolean,
+          value: false
         }
       },
 

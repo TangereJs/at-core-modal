@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8" />
+  <title>at-core-modal demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="wide-demo-helper.html">
+
+  <style>
+    body {
+      font-family: "Helvetica Neue";
+      color: #666;
+      padding: 40px;
+    }
+
+    .m {
+      margin: 16px;
+    }
+
+    .wide-demo {
+      margin: 16px auto;
+      max-width: 200px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <wide-demo-helper class="wide-demo">
+    <div class="m">
+      <h4>For this modal wide mode is not set</h4>
+      <p>When browser viewport width is over 800, width of this content will remain at max-width of 500px</p>
+    </div>
+  </wide-demo-helper>
+  <wide-demo-helper wide class="wide-demo">
+    <div class="m">
+      <h4>For this modal wide mode is set</h4>
+      <p>When browser viewport width is over 800 width of this content will have max-width of 1000px</p>
+    </div>
+  </wide-demo-helper>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<link rel="import" href="../../tangere/tangere.html">
+<link rel="import" href="../at-core-modal.html">
+
+<dom-module id="wide-demo-helper">
+  <template>
+    <style>
+      :host {
+        display: block;
+        box-sizing: border-box;
+      }
+    </style>
+    <button type="button" on-tap="_handleButtonTap">Open modal</button>
+    <at-core-modal id="coreModal" wide$="[[wide]]">
+      <content></content>
+    </at-core-modal>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "wide-demo-helper",
+    properties: {
+      wide: {
+        type: Boolean,
+        value: false
+      }
+    },
+
+    _handleButtonTap: function(event) {
+      this.$.coreModal.open();
+    },
+    
+    ready: function() {
+    }
+  });
+</script>
