@@ -43,6 +43,12 @@
         wide: {
           type: Boolean,
           value: false
+        },
+
+        isOpen: {
+          type: Boolean,
+          value: false,
+          readOnly: true
         }
       },
 
@@ -98,9 +104,9 @@
       },
 
       open: function () {
-        if (this._open) debugger;
-        if (this._open) return;
-        this._open = true;
+        if (this.isOpen) debugger;
+        if (this.isOpen) return;
+        this._setIsOpen(true);
 
         if (this.parentElement) {
           this._oldParentElement = this.parentElement;
@@ -129,7 +135,7 @@
 
       close: function (reason) {
 
-        if (!this._open) return;
+        if (!this.isOpen) return;
 
         var evData = { 
           name: this.name,
@@ -138,7 +144,7 @@
 
         this.fire("close-modal", evData, { bubbles: false });
 
-        this._open = false;
+        this._setIsOpen(false);
 
         document.body.removeChild(this);
         if (this._oldParentElement) {

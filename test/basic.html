@@ -1,0 +1,849 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>at-core-modal tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../at-core-modal.html">
+  <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html" />
+</head>
+
+<body>
+  <test-fixture id="initial">
+    <template>
+      <at-core-modal></at-core-modal>
+    </template>
+  </test-fixture>
+
+  <!-- 
+      minWidth fixtures 
+    -->
+  <test-fixture id="minWidthIsUndefined">
+    <template>
+      <at-core-modal min-width="undefined"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIsNull">
+    <template>
+      <at-core-modal min-width="null"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIsTrue">
+    <template>
+      <at-core-modal min-width="true"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIsFalse">
+    <template>
+      <at-core-modal min-width="false"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIs-42">
+    <template>
+      <at-core-modal min-width="-42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIs0">
+    <template>
+      <at-core-modal min-width="0"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIs42">
+    <template>
+      <at-core-modal min-width="42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIsEmpty">
+    <template>
+      <at-core-modal min-width=""></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIsLorem_ipsum">
+    <template>
+      <at-core-modal min-width="lorem ipsum"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIs{}">
+    <template>
+      <at-core-modal min-width="{}"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIs[]">
+    <template>
+      <at-core-modal min-width="[]"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="minWidthIsFunction">
+    <template>
+      <at-core-modal min-width="function f() { return undefined; }"></at-core-modal>
+    </template>
+  </test-fixture>
+
+  <!-- 
+      name fixtures 
+    -->
+  <test-fixture id="nameIsUndefined">
+    <template>
+      <at-core-modal name="undefined"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIsNull">
+    <template>
+      <at-core-modal name="null"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIsTrue">
+    <template>
+      <at-core-modal name="true"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIsFalse">
+    <template>
+      <at-core-modal name="false"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIs-42">
+    <template>
+      <at-core-modal name="-42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIs0">
+    <template>
+      <at-core-modal name="0"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIs42">
+    <template>
+      <at-core-modal name="42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIsEmpty">
+    <template>
+      <at-core-modal name=""></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIsLorem_ipsum">
+    <template>
+      <at-core-modal name="lorem ipsum"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIs{}">
+    <template>
+      <at-core-modal name="{}"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIs[]">
+    <template>
+      <at-core-modal name="[]"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="nameIsFunction">
+    <template>
+      <at-core-modal name="function f() { return undefined; }"></at-core-modal>
+    </template>
+  </test-fixture>
+
+
+  <!-- 
+      wide fixtures 
+    -->
+  <test-fixture id="wideIsUndefined">
+    <template>
+      <at-core-modal wide="undefined"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIsNull">
+    <template>
+      <at-core-modal wide="null"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIsTrue">
+    <template>
+      <at-core-modal wide="true"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIsFalse">
+    <template>
+      <at-core-modal wide="false"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIs-42">
+    <template>
+      <at-core-modal wide="-42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIs0">
+    <template>
+      <at-core-modal wide="0"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIs42">
+    <template>
+      <at-core-modal wide="42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIsEmpty">
+    <template>
+      <at-core-modal wide=""></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIsLorem_ipsum">
+    <template>
+      <at-core-modal wide="lorem ipsum"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIs{}">
+    <template>
+      <at-core-modal wide="{}"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIs[]">
+    <template>
+      <at-core-modal wide="[]"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="wideIsFunction">
+    <template>
+      <at-core-modal wide="function f() { return undefined; }"></at-core-modal>
+    </template>
+  </test-fixture>
+
+  <!-- 
+      isOpen fixtures 
+    -->
+  <test-fixture id="isOpenIsUndefined">
+    <template>
+      <at-core-modal is-open="undefined"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIsNull">
+    <template>
+      <at-core-modal is-open="null"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIsTrue">
+    <template>
+      <at-core-modal is-open="true"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIsFalse">
+    <template>
+      <at-core-modal is-open="false"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIs-42">
+    <template>
+      <at-core-modal is-open="-42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIs0">
+    <template>
+      <at-core-modal is-open="0"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIs42">
+    <template>
+      <at-core-modal is-open="42"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIsEmpty">
+    <template>
+      <at-core-modal is-open=""></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIsLorem_ipsum">
+    <template>
+      <at-core-modal is-open="lorem ipsum"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIs{}">
+    <template>
+      <at-core-modal is-open="{}"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIs[]">
+    <template>
+      <at-core-modal is-open="[]"></at-core-modal>
+    </template>
+  </test-fixture>
+  <test-fixture id="isOpenIsFunction">
+    <template>
+      <at-core-modal is-open="function f() { return undefined; }"></at-core-modal>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('initial value tests', function() {
+      test('initial value', function() {
+        var elt = fixture('initial');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+    });
+
+    // 
+    // minWidth attribute tests
+    // 
+    suite("minWidth attribute tests", function() {
+      test('minWidth is undefined', function() {
+        var elt = fixture('minWidthIsUndefined');
+
+        assert.equal(elt.minWidth, "undefined");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is null', function() {
+        var elt = fixture('minWidthIsNull');
+
+        assert.equal(elt.minWidth, "null");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is true', function() {
+        var elt = fixture('minWidthIsTrue');
+
+        assert.equal(elt.minWidth, "true");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is false', function() {
+        var elt = fixture('minWidthIsFalse');
+
+        assert.equal(elt.minWidth, "false");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is -42', function() {
+        var elt = fixture('minWidthIs-42');
+
+        assert.equal(elt.minWidth, "-42");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is 0', function() {
+        var elt = fixture('minWidthIs0');
+
+        assert.equal(elt.minWidth, "0");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is 42', function() {
+        var elt = fixture('minWidthIs42');
+
+        assert.equal(elt.minWidth, "42");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is empty', function() {
+        var elt = fixture('minWidthIsEmpty');
+
+        assert.equal(elt.minWidth, "");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is lorem ipsum', function() {
+        var elt = fixture('minWidthIsLorem_ipsum');
+
+        assert.equal(elt.minWidth, "lorem ipsum");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is {}', function() {
+        var elt = fixture('minWidthIs{}');
+
+        assert.equal(elt.minWidth, "{}");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is []', function() {
+        var elt = fixture('minWidthIs[]');
+
+        assert.equal(elt.minWidth, "[]");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('minWidth is function', function() {
+        var elt = fixture('minWidthIsFunction');
+
+        assert.equal(elt.minWidth, "function f() { return undefined; }");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+    });
+
+    // 
+    // name attribute tests
+    // 
+    suite("name attribute tests", function() {
+      test('name is undefined', function() {
+        var elt = fixture('nameIsUndefined');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "undefined");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is null', function() {
+        var elt = fixture('nameIsNull');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "null");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is true', function() {
+        var elt = fixture('nameIsTrue');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "true");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is false', function() {
+        var elt = fixture('nameIsFalse');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "false");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is -42', function() {
+        var elt = fixture('nameIs-42');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "-42");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is 0', function() {
+        var elt = fixture('nameIs0');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "0");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is 42', function() {
+        var elt = fixture('nameIs42');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "42");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is empty', function() {
+        var elt = fixture('nameIsEmpty');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is lorem ipsum', function() {
+        var elt = fixture('nameIsLorem_ipsum');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "lorem ipsum");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is {}', function() {
+        var elt = fixture('nameIs{}');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "{}");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is []', function() {
+        var elt = fixture('nameIs[]');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "[]");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('name is function', function() {
+        var elt = fixture('nameIsFunction');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "function f() { return undefined; }");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+    });
+
+    // 
+    // wide attribute tests
+    // 
+    suite("wide attribute tests", function() {
+      test('wide is undefined', function() {
+        var elt = fixture('wideIsUndefined');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is null', function() {
+        var elt = fixture('wideIsNull');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is true', function() {
+        var elt = fixture('wideIsTrue');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is false', function() {
+        var elt = fixture('wideIsFalse');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is -42', function() {
+        var elt = fixture('wideIs-42');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is 0', function() {
+        var elt = fixture('wideIs0');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is 42', function() {
+        var elt = fixture('wideIs42');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is empty', function() {
+        var elt = fixture('wideIsEmpty');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is lorem ipsum', function() {
+        var elt = fixture('wideIsLorem_ipsum');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is {}', function() {
+        var elt = fixture('wideIs{}');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is []', function() {
+        var elt = fixture('wideIs[]');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('wide is function', function() {
+        var elt = fixture('wideIsFunction');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, true);
+        assert.equal(elt.isOpen, false);
+      });
+    });
+
+    // 
+    // isOpen attribute tests
+    // 
+    suite("isOpen attribute tests", function() {
+      test('isOpen is undefined', function() {
+        var elt = fixture('isOpenIsUndefined');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is null', function() {
+        var elt = fixture('isOpenIsNull');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is true', function() {
+        var elt = fixture('isOpenIsTrue');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is false', function() {
+        var elt = fixture('isOpenIsFalse');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is -42', function() {
+        var elt = fixture('isOpenIs-42');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is 0', function() {
+        var elt = fixture('isOpenIs0');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, "0");
+      });
+
+      test('isOpen is 42', function() {
+        var elt = fixture('isOpenIs42');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is empty', function() {
+        var elt = fixture('isOpenIsEmpty');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, '');
+      });
+
+      test('isOpen is lorem ipsum', function() {
+        var elt = fixture('isOpenIsLorem_ipsum');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is {}', function() {
+        var elt = fixture('isOpenIs{}');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is []', function() {
+        var elt = fixture('isOpenIs[]');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+
+      test('isOpen is function', function() {
+        var elt = fixture('isOpenIsFunction');
+
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
+      });
+    });
+
+    suite("tests where properties are set as in code", function() {
+
+      test('invalid maxWidth values', function() {
+        var elt = fixture('initial');
+
+        var actValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        var expValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        for (var i = 0; i < actValues.length; i++) {
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.minWidth = actValue;
+          assert.deepEqual(elt.minWidth, expValue);
+          assert.equal(elt.name, "");
+          assert.equal(elt.wide, false);
+          assert.equal(elt.isOpen, false);
+        }
+      });
+
+      test('invalid name values', function() {
+        var elt = fixture('initial');
+
+        var actValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        var expValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        for (var i = 0; i < actValues.length; i++) {
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.name = actValue;
+          assert.equal(elt.minWidth, "600");
+          assert.deepEqual(elt.name, expValue);
+          assert.equal(elt.wide, false);
+          assert.equal(elt.isOpen, false);
+        }
+      });
+
+      test('invalid wide values', function() {
+        var elt = fixture('initial');
+
+        var actValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        var expValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        for (var i = 0; i < actValues.length; i++) {
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.wide = actValue;
+          assert.equal(elt.minWidth, "600");
+          assert.equal(elt.name, "");
+          assert.deepEqual(elt.wide, expValue);
+          assert.equal(elt.isOpen, false);
+        }
+      });
+
+      test('invalid isOpen values', function() {
+        var elt = fixture('initial');
+
+        var actValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        var expValues = [
+          "undefined", "null", "true", "false", "-42", "0", "42", "", "lorem ipsum", "{}", "[]", "function f() { return undefined; }",
+          undefined, null, true, false, -42, 0, 42, {}, []
+        ];
+
+        for (var i = 0; i < actValues.length; i++) {
+          var actValue = actValues[i];
+          var expValue = expValues[i];
+
+          elt.isOpen = actValue;
+          assert.equal(elt.minWidth, "600");
+          assert.equal(elt.name, "");
+          assert.equal(elt.wide, false);
+          assert.deepEqual(elt.isOpen, false);
+        }
+      });
+
+
+    });
+  </script>
+</body>
+
+</html>
