@@ -3,18 +3,18 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>at-carbon-message tests</title>
+  <title>at-core-modal tests</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
-  <link rel="import" href="../at-carbon-message.html">
+  <link rel="import" href="../at-core-modal.html">
   <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html" />
 </head>
 
 <body>
   <test-fixture id="initial">
     <template>
-      <at-carbon-message></at-carbon-message>
+      <at-core-modal></at-core-modal>
     </template>
   </test-fixture>
 
@@ -24,41 +24,38 @@
       test('uiinteraction', function() {
         var elt = fixture('initial');
 
-        assert.equal(elt.type, "warning");
-        assert.equal(elt.html, "");
+        assert.equal(elt.minWidth, "600");
+        assert.equal(elt.name, "");
+        assert.equal(elt.wide, false);
+        assert.equal(elt.isOpen, false);
 
-        // setting html sets the inner html of msg
-        var msg = elt.$.msg;
-        elt.html = "lorem ipsum";
-        assert.equal(msg.innerHTML, "lorem ipsum");
+        // check the media query
+        var mediaQueryStr = elt.$.mediaQuery.query;
+        var expQueryVal = '(min-width: 600px)';
+        assert.equal(mediaQueryStr, expQueryVal);
 
-        var html = "<div>Lorem ipsum</div>";
-        elt.html = html;
-        assert.equal(msg.innerHTML, html);
+        elt.minWidth = 800;
+        mediaQueryStr = elt.$.mediaQuery.query;
+        expQueryVal = '(min-width: 800px)';
+        assert.equal(mediaQueryStr, expQueryVal);
 
-        // when html is empty hide class is present
-        assert.equal(msg.classList.contains('hide'), false);
 
-        elt.html = "";
-        assert.equal(msg.innerHTML, '');
+        // wide is false by default
+        var modalContents = elt.$.modalContents;
+        assert.equal(modalContents.hasAttribute('wide'), false);
 
-        // when html is empty hide class is present
-        assert.equal(msg.classList.contains('hide'), true);
+        elt.wide = true;
+        assert.equal(modalContents.hasAttribute('wide'), true);
+        
+        elt.wide = false;
+        assert.equal(modalContents.hasAttribute('wide'), false);
 
-        // setting type changes the class of msg
-        assert.equal(msg.classList.contains('warning'), true);
+        // open and close the modal
+        elt.open();
+        assert.equal(elt.isOpen, true);
 
-        elt.type = "info";
-        assert.equal(msg.classList.contains('info'), true);
-
-        elt.type = "error";
-        assert.equal(msg.classList.contains('error'), true);
-
-        elt.type = "success";
-        assert.equal(msg.classList.contains('success'), true);
-
-        elt.type = "";
-        assert.equal(msg.classList.contains('success'), true);
+        elt.close();
+        assert.equal(elt.isOpen, false);
 
       });
     });
