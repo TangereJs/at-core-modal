@@ -2,12 +2,12 @@
 <link rel="import" href="../at-carbon-icon/at-carbon-icon.html">
 <link rel="import" href="../at-core-media-query/at-core-media-query.html">
 <link rel="import" href="styles/at-core-modal-styles.html">
+<link rel="import" href="../at-core-style-classes/at-core-style-classes.html">
 
 <dom-module id="at-core-modal">
   <template>
-
     <style include="at-core-modal-styles"></style>
-    <style>
+    <style include="at-core-style-classes">
       :host {
         box-sizing: border-box;
         display: block;
@@ -18,8 +18,14 @@
     <div id="modal" class="modal">
       <div id="overlay" class="overlay"></div>
       <div id="modalContents" class="contents" wide$="[[wide]]">
-        <div on-tap="_closeClick" class="btn-close-container">
-          <at-carbon-icon class="btn-close-position" icon="now:cancel"></at-carbon-icon>
+        <div class="layout-horizontal background-lightGrey text-primary p">
+          <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCaretLeftIcon]]">
+            <at-carbon-icon icon="now:caret-left"></at-carbon-icon>
+          </div>
+          <div class="layout-flex font-title">[[title]]</div>
+          <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCloseIcon]]">
+            <at-carbon-icon class="btn-close-position" icon="now:cancel"></at-carbon-icon>
+          </div>
         </div>
         <content><content>
       </div>
@@ -31,6 +37,11 @@
     Polymer({
       is: 'at-core-modal',
       properties: {
+        title: {
+          type: String,
+          value: ''
+        },
+
         minWidth: {
           type: String,
           value: '600'
@@ -49,6 +60,16 @@
           type: Boolean,
           value: false,
           readOnly: true
+        },
+
+        _hideCaretLeftIcon: {
+          type: Boolean,
+          value: true
+        },
+
+        _hideCloseIcon: {
+          type: Boolean,
+          value: false
         }
       },
 
@@ -86,6 +107,9 @@
           mcHeight = window.innerHeight;
         }
         var isMobile = !newValue;
+        
+        this._hideCloseIcon = isMobile;
+        this._hideCaretLeftIcon = !isMobile;
 
         this.toggleClass('mobile', isMobile, modalContents);
         this.toggleClass('mobile', isMobile, this.$.overlay);  // mobile has full white overlay
