@@ -18,7 +18,7 @@
     <div id="modal" class="modal">
       <div id="overlay" class="overlay"></div>
       <div id="modalContents" class="contents" wide$="[[wide]]">
-        <div class="layout-horizontal background-lightGrey text-primary p">
+        <div class$="layout-horizontal [[_computeExtraClasses(title)]]">
           <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCaretLeftIcon]]">
             <at-carbon-icon icon="now:caret-left"></at-carbon-icon>
           </div>
@@ -71,6 +71,11 @@
           type: Boolean,
           value: false
         }
+      },
+
+      _computeExtraClasses: function(title) {
+        if (title.length == 0) return;
+        return "background-lightGrey text-primary p";
       },
 
       _calculateQueryString: function (minWidth) {
