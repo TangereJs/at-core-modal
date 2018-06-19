@@ -100,32 +100,49 @@
         });
       },
 
-      _queryMatchesChangedHandler: function (newValue) {
- 
+      _checkModalContentHeight: function() {
+        // console.log("Checking modal content height, try " + (++this._showCntr));
+        Polymer.dom.flush();
         var modalContents = this.$.modalContents;
         var mcClientRect = modalContents.getBoundingClientRect();
         var mcHeight = mcClientRect.height;
         if (mcHeight === 0) {
-          console.log("mcHeight failed, retry " + this._showCntr++);
-          if (this._showCntr < 5) {
-            this.async(function () {
-              this._queryMatchesChangedHandler(newValue);
-            }, 100);
-            return;
-          }
-          mcHeight = window.innerHeight;
+          setTimeout(this._checkModalContentHeight.bind(this), 100);
+          return;
         }
+        
+        // console.log("Modal content height is: " + mcHeight);
+        this._updateCoreModalWithQueryMatchesValue(this.$.mediaQuery.queryMatches, mcHeight);
+      },
+
+      _queryMatchesChangedHandler: function (newValue) {
+        if (!this.isOpen) return;
+        this._checkModalContentHeight();
+      },
+
+      _updateCoreModalWithQueryMatchesValue: function (newValue, mcHeight) {
+        var modalContents = this.$.modalContents;
         var isMobile = !newValue;
 
         if (isMobile) {
-          this._dbPrevPosition = document.body.style.position;
-          this._dbPrevOverflow = document.body.style.overflow;
-          document.body.style.position = "fixed"; // "absolute" also works
+          if (this._dbPrevPosition == undefined) {
+            this._dbPrevPosition = document.body.style.position;
+          }
+          if (this._dbPrevOverflow == undefined) {
+            this._dbPrevOverflow = document.body.style.overflow;
+          }
+
+          // document.body.style.position = "fixed"; // "absolute" also works
           document.body.style.overflow = "hidden";
         
         } else {
+          if (this._dbPrevPosition !== undefined) {
           document.body.style.position = this._dbPrevPosition;
-          document.body.style.overflow = this._dbPrevOverflow;
+          }
+          if (this._dbPrevOverflow !== undefined) {
+            document.body.style.overflow = this._dbPrevOverflow;
+          }
+
         }
 
         this._hideCloseIcon = isMobile;
@@ -166,16 +183,17 @@
           window.parentIFrame.sendMessage({ cmd: "position-push", x:0, y:0 });
         }
 
-        // if (document.body.childNodes.length > 0) {
-        //   document.body.insertBefore(this, document.body.childNodes[0]);
-        // } else {
-          document.body.appendChild(this);
-        // }
+        document.body.appendChild(this);
 
         var isMobile = !this.$.mediaQuery.queryMatches;
         if (isMobile) {
-          this._dbPrevPosition = document.body.style.position;
-          this._dbPrevOverflow = document.body.style.overflow;
+          if (this._dbPrevPosition == undefined) {
+            this._dbPrevPosition = document.body.style.position;
+          }
+          if (this._dbPrevOverflow == undefined) {
+            this._dbPrevOverflow = document.body.style.overflow;
+          }
+          
           document.body.style.position = "fixed"; // "absolute" also works
           document.body.style.overflow = "hidden";
         }
@@ -204,8 +222,12 @@
 
         document.body.removeChild(this);
 
-        document.body.style.position = this._dbPrevPosition;
-        document.body.style.overflow = this._dbPrevOverflow;
+        if (this._dbPrevPosition !== undefined) {
+          document.body.style.position = this._dbPrevPosition;
+        }
+        if (this._dbPrevOverflow !== undefined) {
+          document.body.style.overflow = this._dbPrevOverflow;
+        }
 
         if (this._oldParentElement) {
           this._oldParentElement.appendChild(this);
