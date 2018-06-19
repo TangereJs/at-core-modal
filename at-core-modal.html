@@ -12,13 +12,17 @@
         box-sizing: border-box;
         display: block;
       }
+
+      .prevent-collapsing {
+        min-height: 56px;
+      }
     </style>
 
     <at-core-media-query id="mediaQuery" query$="{{_calculateQueryString(minWidth)}}"></at-core-media-query>
     <div id="modal" class="modal">
       <div id="overlay" class="overlay"></div>
-      <div id="modalContents" class="contents" wide$="[[wide]]">
-        <div class$="layout-horizontal [[_computeExtraClasses(title)]]">
+      <div id="modalContents" class="contents layout-vertical" wide$="[[wide]]">
+        <div class$="layout-horizontal prevent-collapsing [[_computeExtraClasses(title)]]">
           <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCaretLeftIcon]]">
             <at-carbon-icon icon="now:caret-left"></at-carbon-icon>
           </div>
@@ -112,7 +116,18 @@
           mcHeight = window.innerHeight;
         }
         var isMobile = !newValue;
+
+        if (isMobile) {
+          this._dbPrevPosition = document.body.style.position;
+          this._dbPrevOverflow = document.body.style.overflow;
+          document.body.style.position = "fixed"; // "absolute" also works
+          document.body.style.overflow = "hidden";
         
+        } else {
+          document.body.style.position = this._dbPrevPosition;
+          document.body.style.overflow = this._dbPrevOverflow;
+        }
+
         this._hideCloseIcon = isMobile;
         this._hideCaretLeftIcon = !isMobile;
 
@@ -151,7 +166,19 @@
           window.parentIFrame.sendMessage({ cmd: "position-push", x:0, y:0 });
         }
 
-        document.body.appendChild(this);
+        // if (document.body.childNodes.length > 0) {
+        //   document.body.insertBefore(this, document.body.childNodes[0]);
+        // } else {
+          document.body.appendChild(this);
+        // }
+
+        var isMobile = !this.$.mediaQuery.queryMatches;
+        if (isMobile) {
+          this._dbPrevPosition = document.body.style.position;
+          this._dbPrevOverflow = document.body.style.overflow;
+          document.body.style.position = "fixed"; // "absolute" also works
+          document.body.style.overflow = "hidden";
+        }
 
         this.toggleClass('show', true, this.$.modal);
         this.toggleClass('dark', true, this.$.overlay);
@@ -176,6 +203,10 @@
         this._setIsOpen(false);
 
         document.body.removeChild(this);
+
+        document.body.style.position = this._dbPrevPosition;
+        document.body.style.overflow = this._dbPrevOverflow;
+
         if (this._oldParentElement) {
           this._oldParentElement.appendChild(this);
           this._oldParentElement = null;

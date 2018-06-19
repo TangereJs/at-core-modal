@@ -65,18 +65,19 @@
       }
 
       .contents.height-less-then {
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        top: 10px;
+        left: 0;
+        right: 0;
+        margin: auto;
       }
 
       .contents.height-less-then.mobile {
         left: 0;
         max-width: none;
-        top: 0;
-        bottom: 0;
+        top: 0;        
         transform: translate(0, 0);
-        min-height: 100vh;
+        max-height: 100vh;
+        overflow-y: auto;
       }
 
       .contents.height-greater-then {
