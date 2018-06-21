@@ -64,35 +64,38 @@
         }
       }
 
+      /* Height of the modal is less then height of the viewport */
       .contents.height-less-then {
-        top: 10px;
-        left: 0;
-        right: 0;
-        margin: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
       }
-
+      
+      /* Height of the modal is less then height of the viewport, but width is less than 600px */
       .contents.height-less-then.mobile {
         left: 0;
-        max-width: none;
         top: 0;        
-        transform: translate(0, 0);
+        max-width: none;
+        transform: initial;
         max-height: 100vh;
-        overflow-y: auto;
       }
 
+      /* Height of the modal is greater then height of the viewport */
       .contents.height-greater-then {
         top: 0;
-        margin: 64px 0 64px 0;
+        margin: 16px 0 16px 0;
         left: 50%;
-        transform: translateX(-50%);        
+        transform: translateX(-50%);
       }
 
+      /* Height of the modal is less then height of the viewport, but width is less than 600px */
       .contents.height-greater-then.mobile {
         top: 0;
         margin: 0;
         left: 0;
         max-width: none;
         transform: initial;
+        overflow-y: auto;
       }
     </style>
   </template>
