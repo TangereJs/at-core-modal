@@ -108,7 +108,7 @@
           var mcClientRect = modalContents.getBoundingClientRect();
           var mcHeight = mcClientRect.height;
           if (mcHeight == 0) return;
-          console.log(`debouce function called mcHeight = ${mcHeight}`);
+
           self._updateCoreModalWithQueryMatchesValue(self.$.mediaQuery.queryMatches, mcHeight);
         }, 20);
       },
@@ -137,7 +137,7 @@
           return;
         }
         
-        // console.log("Modal content height is: " + mcHeight);
+        console.log("Modal content height is: " + mcHeight);
         this._updateCoreModalWithQueryMatchesValue(this.$.mediaQuery.queryMatches, mcHeight);
       },
 
