@@ -152,7 +152,7 @@
         this.toggleClass('mobile', isMobile, this.$.overlay);  // mobile has full white overlay
 
         var windowHeight = window.innerHeight;
-        var heightLessThan = windowHeight >= mcHeight;
+        var heightLessThan = windowHeight > mcHeight;
 
         if (!isMobile && window.parentIFrame != null) {
           heightLessThan = false; // never center in cross domain iframe
