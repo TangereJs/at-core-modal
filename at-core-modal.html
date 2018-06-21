@@ -87,6 +87,32 @@
         return result;
       },
 
+      attached: function() {
+        if (!this._boundWindowResizeHandler) {
+          this._boundWindowResizeHandler = this._windowResizeHandler.bind(this);
+        }
+        window.addEventListener('resize', this._boundWindowResizeHandler);
+      },
+
+      detached: function() {
+        window.removeEventListener('resize', this._boundWindowResizeHandler);
+        this._boundWindowResizeHandler = undefined;
+      },
+
+      _windowResizeHandler: function() {
+        if (!this.isOpen) return;
+        var self = this;
+        var modalContents = self.$.modalContents;
+        this.debounce('window_resize', function() {
+          Polymer.dom.flush();
+          var mcClientRect = modalContents.getBoundingClientRect();
+          var mcHeight = mcClientRect.height;
+          if (mcHeight == 0) return;
+          console.log(`debouce function called mcHeight = ${mcHeight}`);
+          self._updateCoreModalWithQueryMatchesValue(self.$.mediaQuery.queryMatches, mcHeight);
+        }, 20);
+      },
+
       ready: function() {
         var self = this;
         var overlay = Polymer.dom(this.root).querySelector('.overlay');
