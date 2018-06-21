@@ -125,24 +125,16 @@
         var isMobile = !newValue;
 
         if (isMobile) {
-          if (this._dbPrevPosition == undefined) {
-            this._dbPrevPosition = document.body.style.position;
-          }
           if (this._dbPrevOverflow == undefined) {
             this._dbPrevOverflow = document.body.style.overflow;
           }
 
-          // document.body.style.position = "fixed"; // "absolute" also works
           document.body.style.overflow = "hidden";
         
         } else {
-          if (this._dbPrevPosition !== undefined) {
-          document.body.style.position = this._dbPrevPosition;
-          }
           if (this._dbPrevOverflow !== undefined) {
             document.body.style.overflow = this._dbPrevOverflow;
           }
-
         }
 
         this._hideCloseIcon = isMobile;
@@ -157,7 +149,7 @@
         if (!isMobile && window.parentIFrame != null) {
           heightLessThan = false; // never center in cross domain iframe
         }
-
+        
         // alert("isMobile " + isMobile + ", " + windowHeight +", " + heightLessThan);
 
         this.toggleClass('height-less-then', heightLessThan, modalContents);
@@ -187,14 +179,9 @@
 
         var isMobile = !this.$.mediaQuery.queryMatches;
         if (isMobile) {
-          if (this._dbPrevPosition == undefined) {
-            this._dbPrevPosition = document.body.style.position;
-          }
           if (this._dbPrevOverflow == undefined) {
             this._dbPrevOverflow = document.body.style.overflow;
           }
-          
-          document.body.style.position = "fixed"; // "absolute" also works
           document.body.style.overflow = "hidden";
         }
 
@@ -222,9 +209,6 @@
 
         document.body.removeChild(this);
 
-        if (this._dbPrevPosition !== undefined) {
-          document.body.style.position = this._dbPrevPosition;
-        }
         if (this._dbPrevOverflow !== undefined) {
           document.body.style.overflow = this._dbPrevOverflow;
         }
