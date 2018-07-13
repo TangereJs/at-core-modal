@@ -16,6 +16,10 @@
       .prevent-collapsing {
         min-height: 56px;
       }
+
+      [hidden] {
+        display: none !important;
+      }
     </style>
 
     <at-core-media-query id="mediaQuery" query$="{{_calculateQueryString(minWidth)}}"></at-core-media-query>
@@ -32,6 +36,7 @@
           </div>
         </div>
         <content><content>
+        <slot></slot>
       </div>
     </div>
 
