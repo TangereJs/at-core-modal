@@ -35,7 +35,6 @@
             <at-carbon-icon class="btn-close-position" icon="now:cancel"></at-carbon-icon>
           </div>
         </div>
-        <content><content>
         <slot></slot>
       </div>
     </div>
@@ -187,9 +186,16 @@
         this.toggleClass('height-greater-then', !heightLessThan, modalContents);
       },
 
-      open: function () {
-        if (this.isOpen) debugger;
+      open: function (domNode) {
+
         if (this.isOpen) return;
+        
+        if (domNode != null) {
+          this._existingNodeOpen = true;
+          this._openExistingDomNode(domNode);
+          return;
+        }
+
         this._setIsOpen(true);
 
         if (this.parentElement) {
@@ -228,7 +234,11 @@
       close: function (reason) {
 
         if (!this.isOpen) return;
-
+        
+        if (this._existingNodeOpen) {
+          this._closeExistingNode();
+          this._existingNodeOpen = false;
+        }
         var evData = { 
           name: this.name,
           reason: reason 
@@ -270,7 +280,33 @@
 
       _closeClick: function () {
         this.close();
+      },
+
+      _openExistingDomNode: function(domNode) {
+        var placeholder = domNode.cloneNode(true);
+
+        this._existingNodePlaceholder = placeholder;
+
+        var existingParent = Polymer.dom(domNode).parentNode;
+        
+        Polymer.dom(existingParent).insertBefore(placeholder, domNode);
+        Polymer.dom(existingParent).removeChild(domNode);
+
+        Polymer.dom(this).appendChild(domNode);
+
+        this.open();
+      },
+
+      _closeExistingNode: function() {
+        var domNode = Polymer.dom(this).children[0];
+        Polymer.dom(this).removeChild(domNode);
+
+        var existingParent = Polymer.dom(this._existingNodePlaceholder).parentNode;
+        Polymer.dom(existingParent).insertBefore(domNode, this._existingNodePlaceholder);
+        Polymer.dom(existingParent).removeChild(this._existingNodePlaceholder);
+        this._existingNodePlaceholder = null;        
       }
+
     });
   </script>
 </dom-module>

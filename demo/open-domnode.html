@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8" />
+  <title>at-core-modal demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../at-core-modal.html">
+
+  <style>
+    body {
+      font-family: "Helvetica Neue";
+      color: #666;
+      padding: 40px;
+    }
+
+    .m {
+      margin: 16px;
+    }
+
+    .wide-demo {
+      margin: 16px auto;
+      max-width: 200px;
+    }
+  </style>
+
+</head>
+
+<body>
+  
+  <div id="existingNode">This is an existing node.</div>
+
+  <at-core-modal id="modal"></at-core-modal>
+
+  <button id="open" type="button">Open existing node in modal</button>
+
+  <script>
+    document.addEventListener('WebComponentsReady', function() {
+      var existingNode = document.getElementById('existingNode');
+      var modal = document.getElementById('modal');
+      var open = document.getElementById('open');
+
+      open.addEventListener('click', function(event) {
+        modal.open(existingNode);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
