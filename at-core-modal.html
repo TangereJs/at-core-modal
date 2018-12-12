@@ -285,6 +285,13 @@
       _openExistingDomNode: function(domNode) {
         var placeholder = domNode.cloneNode(true);
 
+        if (domNode.properties.constructor === Object) {
+          var keys = Object.keys(domNode.properties);
+          keys.forEach(function(key) {
+            placeholder[key] = domNode[key];
+          });
+        }
+
         this._existingNodePlaceholder = placeholder;
 
         var existingParent = Polymer.dom(domNode).parentNode;
