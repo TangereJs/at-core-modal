@@ -283,14 +283,13 @@
       },
 
       _openExistingDomNode: function(domNode) {
-        var placeholder = domNode.cloneNode(true);
+        var rect = domNode.getBoundingClientRect();
 
-        if (domNode.properties.constructor === Object) {
-          var keys = Object.keys(domNode.properties);
-          keys.forEach(function(key) {
-            placeholder[key] = domNode[key];
-          });
-        }
+        var placeholder = this.create('div');
+        placeholder.style.display = "block";
+        placeholder.style.width = rect.width + 'px';
+        placeholder.style.height = rect.height + 'px';
+        placeholder.style.backgroundColor = "lightgrey";
 
         this._existingNodePlaceholder = placeholder;
 
