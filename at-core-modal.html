@@ -143,7 +143,12 @@
         // console.log("Checking modal content height, try " + (++this._showCntr));
         Polymer.dom.flush();
         var modalContents = this.$.modalContents;
-        var mcClientRect = modalContents.getBoundingClientRect();
+        var mcClientRect = 0;
+
+        setTimeout(function() {
+          mcClientRect = modalContents.getBoundingClientRect();
+        }, 20);
+
         var mcHeight = mcClientRect.height;
         if (mcHeight === 0) {
           setTimeout(this._checkModalContentHeight.bind(this), 100);
