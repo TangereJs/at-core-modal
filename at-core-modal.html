@@ -3,6 +3,7 @@
 <link rel="import" href="../at-core-media-query/at-core-media-query.html">
 <link rel="import" href="styles/at-core-modal-styles.html">
 <link rel="import" href="../at-core-style-classes/at-core-style-classes.html">
+<link rel="import" href="../at-core-resize-sensor/at-core-resize-sensor.html">
 
 <dom-module id="at-core-modal">
   <template>
@@ -30,10 +31,12 @@
       }
     </style>
 
+
     <at-core-media-query id="mediaQuery" query$="{{_calculateQueryString(minWidth)}}"></at-core-media-query>
     <div id="modal" class="modal">
       <div id="overlay" class="overlay"></div>
       <div id="modalContents" class="contents layout-vertical" wide$="[[wide]]">
+        <at-core-resize-sensor id="resizeSensor"></at-core-resize-sensor>
         <div class$="layout-horizontal prevent-collapsing [[_computeExtraClasses(title)]]">
           <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCaretLeftIcon]]">
             <at-carbon-icon icon="now:caret-left"></at-carbon-icon>
@@ -142,14 +145,10 @@
       _checkModalContentHeight: function() {
         // console.log("Checking modal content height, try " + (++this._showCntr));
         Polymer.dom.flush();
-        var modalContents = this.$.modalContents;
-        var mcClientRect = 0;
-
-        setTimeout(function() {
-          mcClientRect = modalContents.getBoundingClientRect();
-        }, 20);
-
-        var mcHeight = mcClientRect.height;
+        this.$.resizeSensor.reset();
+        this.$.resizeSensor.resizeCallback();
+        var mcHeight = this.$.resizeSensor.queryHeight();
+        
         if (mcHeight === 0) {
           setTimeout(this._checkModalContentHeight.bind(this), 100);
           return;
