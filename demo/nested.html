@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8" />
+  <title>at-core-modal demo</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../at-core-modal.html">
+
+  <style>
+    body {
+      font-family: "Helvetica Neue";
+      color: #666;
+      padding: 40px;
+    }
+
+    .m {
+      margin: 16px;
+    }
+
+    .wide-demo {
+      margin: 16px auto;
+      max-width: 200px;
+    }
+
+    #nestedElement1 {
+        text-align:center;
+    }
+
+    #nestedElement2{
+        text-align:center;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="baseElement">
+    <at-core-modal id="modal1">
+        <div id="nestedElement1">
+            Nested element 1
+            <at-core-modal id="modal2">
+                <div id="nestedElement2">
+                    Nested element 2
+                </div>
+            </at-core-modal>
+            <button id="openModal2" type="button">Open nested element 2</button>
+        </div>
+    </at-core-modal>
+
+    <button id="openModal1" type="button">Open nested element 1</button>
+</div>
+
+  <script>
+    document.addEventListener('WebComponentsReady', function () {
+      var modal1 = document.getElementById('modal1');
+      var open1 = document.getElementById('openModal1');
+
+      open1.addEventListener('click', function (event) {
+        modal1.open();
+      });
+
+      var modal2 = document.getElementById('modal2');
+      var open2 = document.getElementById('openModal2');
+
+      open2.addEventListener('click', function (event) {
+        modal2.open();
+      });
+    });
+  </script>
+
+</body>
+
+</html>
