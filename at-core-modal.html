@@ -328,27 +328,18 @@
       },
 
       _isOpenChanged: function(newValue, oldValue) {
-        this._updateZIndex(newValue);
+        if(newValue == true) {
+          Tangere.layerOpen();
+        }
+
+        if(newValue == false) {
+          Tangere.layerClose();
+        }
+
+        var zIndexTmp = Tangere.layerZIndex();
+        this.$.overlay.style.zIndex = zIndexTmp;
+        this.$.modalContents.style.zIndex = zIndexTmp;
       },
-
-      _updateZIndex: function(flag) {
-        if(flag == true) {
-          Tangere.currentLayer++;
-        }
-
-        if(flag == false && Tangere.currentLayer > 0) {
-          Tangere.currentLayer--;
-        }
-
-        var zIndexTmp = Tangere.currentLayer * 100;
-        var modalOverlay = this.$.overlay;
-        var modalContents = this.$.modalContents;
-        modalOverlay.style.zIndex = zIndexTmp;
-        modalContents.style.zIndex = zIndexTmp;
-        console.log("Tangere.currentLayer: " + Tangere.currentLayer);
-        console.log("Modal z-index: " + zIndexTmp);
-      }
-
 
     });
   </script>
