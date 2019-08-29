@@ -79,8 +79,7 @@
         isOpen: {
           type: Boolean,
           value: false,
-          readOnly: true,
-          observer: '_isOpenChanged'
+          readOnly: true
         },
 
         _hideCaretLeftIcon: {
@@ -325,30 +324,7 @@
         Polymer.dom(existingParent).insertBefore(domNode, this._existingNodePlaceholder);
         Polymer.dom(existingParent).removeChild(this._existingNodePlaceholder);
         this._existingNodePlaceholder = null;        
-      },
-
-      _isOpenChanged: function(newValue, oldValue) {
-        this._updateZIndex(newValue);
-      },
-
-      _updateZIndex: function(flag) {
-        if(flag == true) {
-          Tangere.currentLayer++;
-        }
-
-        if(flag == false && Tangere.currentLayer > 0) {
-          Tangere.currentLayer--;
-        }
-
-        var zIndexTmp = Tangere.currentLayer * 100;
-        var modalOverlay = this.$.overlay;
-        var modalContents = this.$.modalContents;
-        modalOverlay.style.zIndex = zIndexTmp;
-        modalContents.style.zIndex = zIndexTmp;
-        console.log("Tangere.currentLayer: " + Tangere.currentLayer);
-        console.log("Modal z-index: " + zIndexTmp);
       }
-
 
     });
   </script>
