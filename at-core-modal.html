@@ -329,16 +329,14 @@
 
       _isOpenChanged: function(newValue, oldValue) {
         if(newValue == true) {
-          Tangere.layerOpen();
+          var zIndex = Tangere.layerOpen()
+          this.$.overlay.style.zIndex = zIndex;
+          this.$.modalContents.style.zIndex = zIndex;
         }
 
-        if(newValue == false) {
+        if(newValue == false && oldValue != undefined) {
           Tangere.layerClose();
         }
-
-        var zIndexTmp = Tangere.layerZIndex();
-        this.$.overlay.style.zIndex = zIndexTmp;
-        this.$.modalContents.style.zIndex = zIndexTmp;
       },
 
     });
