@@ -141,6 +141,21 @@
           self._showCntr = 0;
           self._queryMatchesChangedHandler(event.detail.value);
         });
+
+        // we must use ResizeObserver to detect changes in modal size when it's contents are rendered. Two obvious reasons:
+        // at-core-resize sensor works only when it's located in a relatively positioned wrapper element
+        // also, setting a timeout to calculate height of modal has proven to fail in some cases
+        try {
+          this._resizeObserver = new ResizeObserver(function (entries) {
+            entries.forEach(function () {
+              self._windowResizeHandler();
+            })
+          });
+        }
+        catch (error) {
+          // console.error(error);
+        }
+
       },
 
       _checkModalContentHeight: function() {
@@ -329,12 +344,22 @@
 
       _isOpenChanged: function(newValue, oldValue) {
         if(newValue == true) {
+
+          if(this._resizeObserver != undefined) {
+            this._resizeObserver.observe(this.$.modalContents);
+          }
+
           var zIndex = Tangere.layerOpen()
           this.$.overlay.style.zIndex = zIndex;
           this.$.modalContents.style.zIndex = zIndex;
         }
 
         if(newValue == false && oldValue != undefined) {
+
+          if(this._resizeObserver != undefined) {
+            this._resizeObserver.unobserve(this.$.modalContents);
+          }
+
           Tangere.layerClose();
         }
       },
