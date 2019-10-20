@@ -16,7 +16,7 @@
 
       .btn-close-position {
         position: absolute;
-        right: 0;
+        right: -18px;
         height: 24px;
       }
 
@@ -32,8 +32,9 @@
         z-index: 1000;
       }
 
-      .overlay.dark {
-        opacity: 0.6;
+      .overlay.desktop {
+        background: white;
+        opacity: 0.5;
       }
 
       .overlay.mobile {
@@ -96,6 +97,10 @@
         transform: initial;
         max-height: 100vh;
         overflow-y: auto;
+      }
+
+      .desktopShadow {
+        box-shadow: rgba(0,0,0,0.22) 0px 25.5px 57.5px;
       }
     </style>
   </template>

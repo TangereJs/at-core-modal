@@ -14,6 +14,10 @@
         display: block;
       }
 
+      .title {
+        box-shadow: 0px 7px 7px -2px rgba(100,100,100,0.5) inset;
+      }
+
       .prevent-collapsing {
         min-height: 56px;
         position: fixed;
@@ -21,10 +25,10 @@
         width:100%;
       }
         
-        .addHeight
-        {
-            min-height: 56px;
-        }
+      .addHeight
+      {
+          min-height: 56px;
+      }
         
       [hidden] {
         display: none !important;
@@ -37,13 +41,13 @@
       <div id="overlay" class="overlay"></div>
       <div id="modalContents" class="contents layout-vertical" wide$="[[wide]]">
         <at-core-resize-sensor id="resizeSensor"></at-core-resize-sensor>
-        <div class$="layout-horizontal prevent-collapsing [[_computeExtraClasses(title)]]">
+        <div id="title" class$="layout-horizontal prevent-collapsing [[_computeExtraClasses(title)]]">
           <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCaretLeftIcon]]">
             <at-carbon-icon icon="now:caret-left"></at-carbon-icon>
           </div>
           <div class="layout-flex font-title">[[title]]</div>
           <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCloseIcon]]">
-            <at-carbon-icon class="btn-close-position" icon="now:cancel"></at-carbon-icon>
+            <at-carbon-icon class="btn-close-position" icon="now:modal-close"></at-carbon-icon>
           </div>
         </div>
           <div class="addHeight"></div>
@@ -96,7 +100,7 @@
 
       _computeExtraClasses: function(title) {
         if (title.length == 0) return;
-        return "background-lightGrey text-primary p";
+        return "title text-primary p";
       },
 
       _calculateQueryString: function (minWidth) {
@@ -252,7 +256,8 @@
         }
 
         this.toggleClass('show', true, this.$.modal);
-        this.toggleClass('dark', true, this.$.overlay);
+        this.toggleClass('desktopShadow', !isMobile, this.$.modalContents);
+        this.toggleClass('desktop', true, this.$.overlay);
 
         this._showCntr = 0;
           var queryMatches = this.$.mediaQuery.queryMatches;
@@ -290,7 +295,7 @@
 
         var modalContents = this.$.modalContents;
 
-        this.toggleClass('dark', false, this.$.overlay);
+        this.toggleClass('desktop', false, this.$.overlay);
         this.toggleClass('show', false, this.$.modal);        
         this.toggleClass('mobile', false, modalContents);
         this.toggleClass('mobile', false, this.$.overlay);
