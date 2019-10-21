@@ -14,10 +14,6 @@
         display: block;
       }
 
-      .title {
-        box-shadow: 0px 7px 7px -2px rgba(100,100,100,0.5) inset;
-      }
-
       .prevent-collapsing {
         min-height: 56px;
         position: fixed;
@@ -43,11 +39,11 @@
         <at-core-resize-sensor id="resizeSensor"></at-core-resize-sensor>
         <div id="title" class$="layout-horizontal prevent-collapsing [[_computeExtraClasses(title)]]">
           <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCaretLeftIcon]]">
-            <at-carbon-icon icon="now:caret-left"></at-carbon-icon>
+            <at-carbon-icon class="btn-back" icon="now:caret-left"></at-carbon-icon>
           </div>
           <div class="layout-flex font-title">[[title]]</div>
           <div on-tap="_closeClick" class="btn-close-container" hidden$="[[_hideCloseIcon]]">
-            <at-carbon-icon class="btn-close-position" icon="now:modal-close"></at-carbon-icon>
+            <at-carbon-icon class="btn-close" icon="now:modal-close"></at-carbon-icon>
           </div>
         </div>
           <div class="addHeight"></div>
@@ -100,7 +96,7 @@
 
       _computeExtraClasses: function(title) {
         if (title.length == 0) return;
-        return "title text-primary p";
+        return "title text-primary py pl";
       },
 
       _calculateQueryString: function (minWidth) {
@@ -180,6 +176,7 @@
 
       _queryMatchesChangedHandler: function (newValue) {
         if (!this.isOpen) return;
+        this.toggleClass('desktopShadow', newValue, this.$.modalContents);
         this._checkModalContentHeight();
       },
 
@@ -355,7 +352,7 @@
           }
 
           var zIndex = Tangere.layerOpen()
-          this.$.overlay.style.zIndex = zIndex;
+          this.$.overlay.style.zIndex = zIndex - 1;
           this.$.modalContents.style.zIndex = zIndex;
         }
 
