@@ -46,7 +46,8 @@
             <at-carbon-icon class="btn-close" icon="now:modal-close"></at-carbon-icon>
           </div>
         </div>
-          <div class="addHeight"></div>
+        <div class="addHeight"></div>
+        <at-core-spinner id="busyIndicator" type="line"></at-core-spinner>
         <slot></slot>
       </div>
     </div>
@@ -66,6 +67,7 @@
           type: String,
           value: '600'
         },
+
         name: {
           type: String,
           value: ''
@@ -81,6 +83,12 @@
           value: false,
           readOnly: true,
           observer: '_isOpenChanged'
+        },
+
+        busy: {
+          type: Boolean,
+          value: false,
+          observer: '_busyChanged'
         },
 
         _hideCaretLeftIcon: {
@@ -365,6 +373,12 @@
           Tangere.layerClose();
         }
       },
+
+      _busyChanged: function (newValue, oldValue) {
+        if (newValue == undefined) return;
+        if (newValue == true) this.$.busyIndicator.removeAttribute('hidden');
+        if (newValue == false) this.$.busyIndicator.setAttribute('hidden', true);
+      }
 
     });
   </script>
